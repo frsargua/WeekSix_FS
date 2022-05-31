@@ -1,0 +1,22 @@
+.custom-width-card {
+  width: 20rem;
+}
+
+@media screen and (max-width: 600px) {
+  .custom-width-card {
+    width: 100%;
+  }
+}
+
+#listEl:hover {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.text-orange {
+  color: orange;
+}
+.text-violet {
+  color: blueviolet;
+}
