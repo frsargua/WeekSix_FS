@@ -13,93 +13,190 @@
     <link rel="stylesheet" href="./assets/index.css" />
     <title>Document</title>
   </head>
-  <!-- <body>
+
+  <body>
+    <!-- Header -->
     <header class="text-center bg-dark">
       <h1 class="text-white py-2">Weather Dashboard</h1>
     </header>
-    <div class="d-flex w-100">
-      <div class="container d-flex flex-column col-3">
-        <div class="d-flex flex-column border-bottom border-dark">
-          <h2>Search for a city</h2>
+
+    <!-- Main -->
+    <div class="d-flex flex-column flex-md-row w-100">
+      <div class="col-12 col-md-3 container pb-4 border-dark border">
+        <div class="border-bottom border-dark mb-2 text-center">
+          <h2 class="col-12">Search for a city</h2>
           <input
-            class="rounded my-3"
+            id="searchBarCity"
+            class="rounded my-3 p-2 col-12"
             type="text"
             placeholder="Write the name of the city"
           />
-          <button class="rounded mb-2">Search</button>
+          <button id="searchCityButton" class="rounded mb-2 p-1 col-12">
+            Search
+          </button>
         </div>
-        <div class="container d-flex flex-column text-center p-0">
-          <button class="w-100 bg-danger p-2 rounded my-2">Austin</button>
-          <button class="w-100 bg-danger p-2 rounded my-2">Austin</button>
-          <button class="w-100 bg-danger p-2 rounded my-2">Austin</button>
-          <button class="w-100 bg-danger p-2 rounded my-2">Austin</button>
-          <button class="w-100 bg-danger p-2 rounded my-2">Austin</button>
+        <div>
+          <ul id="previousLocations" class="list-group rounded-0">
+            <!-- <li
+              class="list-group-item border-top-0 border-end-0 border-start-0 active"
+            >
+              Place
+            </li> -->
+          </ul>
         </div>
       </div>
-      <div class="col-9 ms-2">
-        <div>
-          <div class="border border-dark p-2 mb-4">
+      <div id="WeatherSection" class="col-12 col-md-9 px-2">
+        <!-- <div class="border border-dark p-4 mb-4 rounded-2">
+          <div
+            class="container d-flex justify-content-between align-items-center p-0"
+          >
             <h3 class="mb-4">Place + time</h3>
-            <ul class="list-unstyled">
-              <li class="my-2">Temp</li>
-              <li class="my-2">Wind</li>
-              <li class="my-2">Humidity</li>
-              <li class="my-2">UV Index</li>
-            </ul>
+            <img
+              src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/cloud_2601-fe0f.png"
+              alt=""
+              class="col-1"
+            />
           </div>
-          <div>
-            <h3>5-Day Forecast</h3>
-            <div class="d-flex">
-              <div class="bg-danger me-4 p-2 pe-5">
-                <h4>Date</h4>
-                <ul class="list-unstyled">
-                  <li class="my-2">Temp</li>
-                  <li class="my-2">Wind</li>
-                  <li class="my-2">Humidity</li>
-                  <li class="my-2">UV Index</li>
-                </ul>
-              </div>
-              <div class="bg-danger me-4 p-2 pe-5">
-                <h4>Date</h4>
-                <ul class="list-unstyled">
-                  <li class="my-2">Temp</li>
-                  <li class="my-2">Wind</li>
-                  <li class="my-2">Humidity</li>
-                  <li class="my-2">UV Index</li>
-                </ul>
-              </div>
-              <div class="bg-danger me-4 p-2 pe-5">
-                <h4>Date</h4>
-                <ul class="list-unstyled">
-                  <li class="my-2">Temp</li>
-                  <li class="my-2">Wind</li>
-                  <li class="my-2">Humidity</li>
-                  <li class="my-2">UV Index</li>
-                </ul>
-              </div>
-              <div class="bg-danger me-4 p-2 pe-5">
-                <h4>Date</h4>
-                <ul class="list-unstyled">
-                  <li class="my-2">Temp</li>
-                  <li class="my-2">Wind</li>
-                  <li class="my-2">Humidity</li>
-                  <li class="my-2">UV Index</li>
-                </ul>
-              </div>
-              <div class="bg-danger me-4 p-2 pe-5">
-                <h4>Date</h4>
-                <ul class="list-unstyled">
-                  <i></i>
-                  <li>Temp</li>
-                  <li>Wind</li>
-                  <li>Humidity</li>
-                  <li>UV Index</li>
-                </ul>
-              </div>
+          <div class="row g-0">
+            <div class="col-sm-12 col-md-4 p-2 border">Temperature</div>
+            <div class="col-sm-12 col-md-8 p-2 border">16 &deg;</div>
+            <div class="col-sm-12 col-md-4 p-2 border">Wind</div>
+            <div class="col-sm-12 col-md-8 p-2 border">9 MPH &deg;</div>
+            <div class="col-sm-12 col-md-4 p-2 border">Humidity</div>
+            <div class="col-sm-12 col-md-8 p-2 border">46% &deg;</div>
+            <div class="col-sm-12 col-md-4 p-2 border">UV index</div>
+            <div class="col-sm-12 col-md-8 p-2 border">0.5 &deg;</div>
+          </div>
+        </div> -->
+
+        <div
+          id="futureWeatherSection"
+          class="container d-flex flex-wrap justify-content-evenly"
+        >
+          <!-- <div class="border border-dark m-2 rounded-2 custom-width-card p-4">
+            <div
+              class="container d-flex justify-content-between align-items-center p-0"
+            >
+              <h3 class="mb-4">Place + time</h3>
+              <img
+                src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/cloud_2601-fe0f.png"
+                alt=""
+                class="col-1"
+              />
+            </div>
+            <div class="row g-0">
+              <div class="col-sm-12 p-2 border">Temperature</div>
+              <div class="col-sm-12 p-2 border">16 &deg;</div>
+              <div class="col-sm-12 p-2 border">Wind</div>
+              <div class="col-sm-12 p-2 border">9 MPH &deg;</div>
+              <div class="col-sm-12 p-2 border">Humidity</div>
+              <div class="col-sm-12 p-2 border">46% &deg;</div>
+              <div class="col-sm-12 p-2 border">UV index</div>
+              <div class="col-sm-12 p-2 border">0.5 &deg;</div>
             </div>
           </div>
+          <div class="border border-dark m-2 rounded-2 custom-width-card p-4">
+            <div
+              class="container d-flex justify-content-between align-items-center p-0"
+            >
+              <h3 class="mb-4">Place + time</h3>
+              <img
+                src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/cloud_2601-fe0f.png"
+                alt=""
+                class="col-1"
+              />
+            </div>
+            <div class="row g-0">
+              <div class="col-sm-12 p-2 border">Temperature</div>
+              <div class="col-sm-12 p-2 border">16 &deg;</div>
+              <div class="col-sm-12 p-2 border">Wind</div>
+              <div class="col-sm-12 p-2 border">9 MPH &deg;</div>
+              <div class="col-sm-12 p-2 border">Humidity</div>
+              <div class="col-sm-12 p-2 border">46% &deg;</div>
+              <div class="col-sm-12 p-2 border">UV index</div>
+              <div class="col-sm-12 p-2 border">0.5 &deg;</div>
+            </div>
+          </div>
+          <div class="border border-dark m-2 rounded-2 custom-width-card p-4">
+            <div
+              class="container d-flex justify-content-between align-items-center p-0"
+            >
+              <h3 class="mb-4">Place + time</h3>
+              <img
+                src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/cloud_2601-fe0f.png"
+                alt=""
+                class="col-1"
+              />
+            </div>
+            <div class="row g-0">
+              <div class="col-sm-12 p-2 border">Temperature</div>
+              <div class="col-sm-12 p-2 border">16 &deg;</div>
+              <div class="col-sm-12 p-2 border">Wind</div>
+              <div class="col-sm-12 p-2 border">9 MPH &deg;</div>
+              <div class="col-sm-12 p-2 border">Humidity</div>
+              <div class="col-sm-12 p-2 border">46% &deg;</div>
+              <div class="col-sm-12 p-2 border">UV index</div>
+              <div class="col-sm-12 p-2 border">0.5 &deg;</div>
+            </div>
+          </div>
+          <div class="border border-dark m-2 rounded-2 custom-width-card p-4">
+            <div
+              class="container d-flex justify-content-between align-items-center p-0"
+            >
+              <h3 class="mb-4">Place + time</h3>
+              <img
+                src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/cloud_2601-fe0f.png"
+                alt=""
+                class="col-1"
+              />
+            </div>
+            <div class="row g-0">
+              <div class="col-sm-12 p-2 border">Temperature</div>
+              <div class="col-sm-12 p-2 border">16 &deg;</div>
+              <div class="col-sm-12 p-2 border">Wind</div>
+              <div class="col-sm-12 p-2 border">9 MPH &deg;</div>
+              <div class="col-sm-12 p-2 border">Humidity</div>
+              <div class="col-sm-12 p-2 border">46% &deg;</div>
+              <div class="col-sm-12 p-2 border">UV index</div>
+              <div class="col-sm-12 p-2 border">0.5 &deg;</div>
+            </div>
+          </div>
+          <div class="border border-dark m-2 rounded-2 custom-width-card p-4">
+            <div
+              class="container d-flex justify-content-between align-items-center p-0"
+            >
+              <h3 class="mb-4">Place + time</h3>
+              <img
+                src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/cloud_2601-fe0f.png"
+                alt=""
+                class="col-1"
+              />
+            </div>
+            <div class="row g-0">
+              <div class="col-sm-12 p-2 border">Temperature</div>
+              <div class="col-sm-12 p-2 border">16 &deg;</div>
+              <div class="col-sm-12 p-2 border">Wind</div>
+              <div class="col-sm-12 p-2 border">9 MPH &deg;</div>
+              <div class="col-sm-12 p-2 border">Humidity</div>
+              <div class="col-sm-12 p-2 border">46% &deg;</div>
+              <div class="col-sm-12 p-2 border">UV index</div>
+              <div class="col-sm-12 p-2 border">0.5 &deg;</div>
+            </div>
+          </div> -->
         </div>
       </div>
     </div>
-  </body> -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.1/moment.min.js"
+      integrity="sha512-Ti+qWaQIPJpZmOpv8ze0P41zpwahjzcqKzFwJdDNbDwvYRpeb//bnVhXK03o/9cuPemGm2wyVsSfXnMUebU60g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/index.js"></script>
+  </body>
 </html>
