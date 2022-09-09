@@ -33,15 +33,24 @@ const renderCurrentWeather = (
               class="col-1"
             />
           </div>
-          <div class="row g-0">
-            <div class="col-sm-12 col-md-4 p-2 border">Temperature</div>
-            <div class="col-sm-12 col-md-8 p-2 border">${temperature} &deg;</div>
-            <div class="col-sm-12 col-md-4 p-2 border">wind</div>
-            <div class="col-sm-12 col-md-8 p-2 border">${wind} MPH &deg;</div>
-            <div class="col-sm-12 col-md-4 p-2 border">Humidity</div>
-            <div class="col-sm-12 col-md-8 p-2 border">${humidity}% &deg;</div>
-            <div class="col-sm-12 col-md-4 p-2 border">UV index</div>
-            <div class="col-sm-12 col-md-8 p-2 border">${UVIndex} &deg;</div>
+          <div class="column g-0">
+            <div class="col-sm-12 col-md-8 p-2 border d-flex justify-content-between">
+            <div class="col-sm-6">Temperature</div>
+            <div class="col-sm-6">${temperature} &deg;</div>
+            </div>
+            <div class="col-sm-12 col-md-8 p-2 border d-flex justify-content-between">
+            <div class="col-sm-6">Wind</div>
+            <div class="col-sm-6">${wind} &deg;</div>
+            </div>
+            <div class="col-sm-12 col-md-8 p-2 border d-flex justify-content-between">
+            <div class="col-sm-6">Humidity</div>
+            <div class="col-sm-6">${humidity} &deg;</div>
+            </div>
+            <div class="col-sm-12 col-md-8 p-2 border d-flex justify-content-between">
+            <div class="col-sm-6">UV index</div>
+            <div class="col-sm-6">${UVIndex} &deg;</div>
+            </div>
+        
           </div>
         </div>`;
   weatherSectionEl.prepend(currentWeatherSection);
