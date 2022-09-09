@@ -33,6 +33,10 @@ function setColor(UVIndex) {
   return color;
 }
 
+function celsiusToFahrenheit(temp) {
+  let Fahrenheit = (temp * 1.8 + 32).toFixed();
+  return Fahrenheit;
+}
 const renderCurrentWeather = (
   location,
   temperature,
@@ -42,7 +46,7 @@ const renderCurrentWeather = (
   icon
 ) => {
   let color = setColor(UVIndex);
-  console.log("rendering current weather");
+  temperature = celsiusToFahrenheit(temperature);
   const currentWeatherSection = `<div id="currentWeatherSection"class="border border-dark p-4 mb-4 rounded-2">
           <div class="container d-flex justify-content-between align-items-center p-0">
             <h3 class="mb-4">${location} ${currentTime}</h3>
@@ -83,6 +87,7 @@ const renderFutureWeather = async (
   icon
 ) => {
   console.log("rendering Future weather");
+  temperature = celsiusToFahrenheit(temperature);
 
   const colorsArray = ["success", "warning", "orange", "danger", "violet"];
   let color = setColor(UVIndex);
