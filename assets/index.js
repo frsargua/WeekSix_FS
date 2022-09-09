@@ -261,16 +261,19 @@ searchCityButtonEl.on("click", async function () {
       currentWeather.uvi,
       currentWeather.weather[0].icon
     );
-    futureWeather.forEach((element) =>
+    futureWeather.forEach((element) => {
+      console.log(element);
+      const dateObject = new Date(element.dt);
+      const futureDate = dateObject.toLocaleString().split(",")[0];
       renderFutureWeather(
-        cityName,
+        futureDate,
         element.temp.day,
         element.wind_speed,
         element.humidity,
         element.uvi,
         element.weather[0].icon
-      )
-    );
+      );
+    });
   }
 });
 locationList.on("click", async function (event) {
