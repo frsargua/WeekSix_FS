@@ -79,7 +79,7 @@ const renderCurrentWeather = (
 };
 
 const renderFutureWeather = async (
-  location,
+  date,
   temperature,
   wind,
   humidity,
@@ -96,7 +96,7 @@ const renderFutureWeather = async (
             <div
               class="container d-flex justify-content-between align-items-center p-0"
             >
-              <h3 class="mb-4">${location}</h3>
+              <h3 class="mb-4">${date}</h3>
               <img
                 src="https://openweathermap.org/img/w/${icon}.png"
                 alt=""
@@ -298,8 +298,11 @@ locationList.on("click", async function (event) {
       );
       for (let i = 0; i < 5; i++) {
         console.log(futureWeather[i]);
+        const dateObject = new Date(futureWeather[i].dt);
+        const futureDate = dateObject.toLocaleString().split(",")[0];
+        console.log(futureDate);
         renderFutureWeather(
-          cityName,
+          futureDate,
           futureWeather[i].temp.day,
           futureWeather[i].wind_speed,
           futureWeather[i].humidity,
