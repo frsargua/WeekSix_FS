@@ -15,6 +15,24 @@ const renderListItem = (location) => {
   previousLocationsEl.append(listEl);
 };
 
+function setColor(UVIndex) {
+  const colorsArray = ["success", "warning", "orange", "danger", "violet"];
+  let color = "";
+  if (UVIndex <= 2) {
+    color = colorsArray[0];
+  } else if (UVIndex <= 5) {
+    color = colorsArray[1];
+  } else if (UVIndex <= 7) {
+    color = colorsArray[2];
+  } else if (UVIndex <= 10) {
+    color = colorsArray[3];
+  } else {
+    color = colorsArray[4];
+  }
+
+  return color;
+}
+
 const renderCurrentWeather = (
   location,
   temperature,
@@ -23,6 +41,7 @@ const renderCurrentWeather = (
   UVIndex,
   icon
 ) => {
+  let color = setColor(UVIndex);
   console.log("rendering current weather");
   const currentWeatherSection = `<div id="currentWeatherSection"class="border border-dark p-4 mb-4 rounded-2">
           <div class="container d-flex justify-content-between align-items-center p-0">
@@ -48,7 +67,7 @@ const renderCurrentWeather = (
             </div>
             <div class="col-sm-12 col-md-8 p-2 border d-flex justify-content-between">
             <div class="col-sm-6">UV index</div>
-            <div class="col-sm-6">${UVIndex} &deg;</div>
+            <div class="col-sm-6 text-${color}">${UVIndex} &deg;</div>
             </div>
           </div>
         </div>`;
@@ -66,18 +85,7 @@ const renderFutureWeather = async (
   console.log("rendering Future weather");
 
   const colorsArray = ["success", "warning", "orange", "danger", "violet"];
-  let color = "";
-  if (UVIndex <= 2) {
-    color = colorsArray[0];
-  } else if (UVIndex <= 5) {
-    color = colorsArray[1];
-  } else if (UVIndex <= 7) {
-    color = colorsArray[2];
-  } else if (UVIndex <= 10) {
-    color = colorsArray[3];
-  } else {
-    color = colorsArray[4];
-  }
+  let color = setColor(UVIndex);
 
   const futureWeatherSinglecard = `<div class="border border-dark m-2 rounded-2 custom-width-card p-4">
             <div
