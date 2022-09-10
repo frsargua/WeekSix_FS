@@ -6,11 +6,9 @@ const weatherSectionEl = $("#WeatherSection");
 const futureWeatherSectionEl = $("#futureWeatherSection");
 const locationList = $("#previousLocations");
 const currentTime = moment().format("h:mm a");
-console.log(currentTime);
 
 // This renders a li tag with the input name in the search bar.
 const renderListItem = (location) => {
-  console.log("rendering list");
   const listEl = `<li id="listEl" class="list-group-item border-top-0 border-end-0 border-start-0 ">${location}</li>`;
   previousLocationsEl.append(listEl);
 };
@@ -86,7 +84,6 @@ const renderFutureWeather = async (
   UVIndex,
   icon
 ) => {
-  console.log("rendering Future weather");
   temperature = celsiusToFahrenheit(temperature);
 
   const colorsArray = ["success", "warning", "orange", "danger", "violet"];
@@ -131,7 +128,6 @@ const renderFutureWeather = async (
 const initialiseLocalStorage = () => {
   // get feedbackResults from LS
   const feedbackResultsFromLS = JSON.parse(localStorage.getItem("cities"));
-  console.log(feedbackResultsFromLS);
 
   // If this throws undefined, it means
   if (!feedbackResultsFromLS) {
@@ -196,8 +192,6 @@ const constructUrl = (baseUrl, params) => {
 
 // Fetching from the API
 const getLonAndLat = async (location) => {
-  console.log("Lat and lon");
-
   const url = constructUrl("https://api.openweathermap.org/data/2.5/weather", {
     q: location,
     appid: "ff891452cf5dbd2b6b58afe44e37784e",
@@ -221,10 +215,7 @@ const getLonAndLat = async (location) => {
       }
     );
     const forecastData = await fetchData(forecastDataUrl);
-    console.log({
-      cityName: displayCityName,
-      weatherData: forecastData,
-    });
+
     return {
       cityName: displayCityName,
       weatherData: forecastData,
@@ -251,7 +242,6 @@ searchCityButtonEl.on("click", async function () {
 
     const currentWeather = weatherValue.weatherData.current;
     const futureWeather = weatherValue.weatherData.daily;
-    console.log(futureWeather);
     renderListItem(cityName);
     renderCurrentWeather(
       cityName,
@@ -262,8 +252,8 @@ searchCityButtonEl.on("click", async function () {
       currentWeather.weather[0].icon
     );
     futureWeather.forEach((element) => {
-      console.log(element);
-      const dateObject = new Date(element.dt);
+      console.log(element.dt);
+      const dateObject = new Date(element.dt * 1000);
       const futureDate = dateObject.toLocaleString().split(",")[0];
       renderFutureWeather(
         futureDate,
@@ -279,10 +269,8 @@ searchCityButtonEl.on("click", async function () {
 locationList.on("click", async function (event) {
   const currentTarget = event.target;
   if (currentTarget.tagName == "LI") {
-    console.log(currentTarget.textContent);
     const cityName = currentTarget.textContent;
     const arrayFromLS = JSON.parse(localStorage.getItem("cities"));
-    console.log("hi");
     if (arrayFromLS.includes(cityName)) {
       $("#currentWeatherSection").remove();
       $("#futureWeatherSection").empty();
@@ -290,7 +278,6 @@ locationList.on("click", async function (event) {
 
       const currentWeather = weatherValue.weatherData.current;
       const futureWeather = weatherValue.weatherData.daily;
-      console.log(futureWeather);
       renderCurrentWeather(
         cityName,
         currentWeather.temp,
@@ -300,10 +287,8 @@ locationList.on("click", async function (event) {
         currentWeather.weather[0].icon
       );
       for (let i = 0; i < 5; i++) {
-        console.log(futureWeather[i]);
-        const dateObject = new Date(futureWeather[i].dt);
+        const dateObject = new Date(futureWeather[i].dt * 1000);
         const futureDate = dateObject.toLocaleString().split(",")[0];
-        console.log(futureDate);
         renderFutureWeather(
           futureDate,
           futureWeather[i].temp.day,
