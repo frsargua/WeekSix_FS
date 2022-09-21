@@ -27,7 +27,6 @@ function setColor(UVIndex) {
   } else {
     color = colorsArray[4];
   }
-
   return color;
 }
 
@@ -230,8 +229,8 @@ const getLonAndLat = async (location) => {
 searchCityButtonEl.on("click", async function () {
   const cityName = searchBarCity.val();
   const arrayFromLS = JSON.parse(localStorage.getItem("cities"));
-  const weatherValue = await getLonAndLat(cityName);
-  if (!weatherValue) {
+  const { weatherData } = await getLonAndLat(cityName);
+  if (!weatherData) {
     alert("Wrong Name");
     return;
   }
@@ -240,8 +239,7 @@ searchCityButtonEl.on("click", async function () {
     $("#futureWeatherSection").empty();
     storeInLS("cities", cityName);
 
-    const currentWeather = weatherValue.weatherData.current;
-    const futureWeather = weatherValue.weatherData.daily;
+    const { current: currentWeather, daily: futureWeather } = weatherData;
     renderListItem(cityName);
     renderCurrentWeather(
       cityName,
@@ -251,21 +249,22 @@ searchCityButtonEl.on("click", async function () {
       currentWeather.uvi,
       currentWeather.weather[0].icon
     );
-    futureWeather.forEach((element) => {
-      console.log(element.dt);
-      const dateObject = new Date(element.dt * 1000);
-      const futureDate = dateObject.toLocaleString().split(",")[0];
+
+    for (let i = 0; i < 5; i++) {
+      const dateObject = new Date(futureWeather[i].dt * 1000);
+      const futureDate = dateObject.toDateString();
       renderFutureWeather(
         futureDate,
-        element.temp.day,
-        element.wind_speed,
-        element.humidity,
-        element.uvi,
-        element.weather[0].icon
+        futureWeather[i].temp.day,
+        futureWeather[i].wind_speed,
+        futureWeather[i].humidity,
+        futureWeather[i].uvi,
+        futureWeather[i].weather[0].icon
       );
-    });
+    }
   }
 });
+
 locationList.on("click", async function (event) {
   const currentTarget = event.target;
   if (currentTarget.tagName == "LI") {
@@ -274,10 +273,9 @@ locationList.on("click", async function (event) {
     if (arrayFromLS.includes(cityName)) {
       $("#currentWeatherSection").remove();
       $("#futureWeatherSection").empty();
-      const weatherValue = await getLonAndLat(cityName);
+      const { weatherData } = await getLonAndLat(cityName);
+      const { current: currentWeather, daily: futureWeather } = weatherData;
 
-      const currentWeather = weatherValue.weatherData.current;
-      const futureWeather = weatherValue.weatherData.daily;
       renderCurrentWeather(
         cityName,
         currentWeather.temp,
@@ -288,7 +286,7 @@ locationList.on("click", async function (event) {
       );
       for (let i = 0; i < 5; i++) {
         const dateObject = new Date(futureWeather[i].dt * 1000);
-        const futureDate = dateObject.toLocaleString().split(",")[0];
+        const futureDate = dateObject.toDateString();
         renderFutureWeather(
           futureDate,
           futureWeather[i].temp.day,
