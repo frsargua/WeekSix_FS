@@ -48,9 +48,9 @@ const renderCurrentWeather = (
           <div class="container d-flex justify-content-between align-items-center p-0">
             <h3 class="mb-4">${location} ${currentTime}</h3>
             <img
-              src="https://openweathermap.org/img/w/${icon}.png"
+              src="https://openweathermap.org/img/wn/${icon}@2x.png"
               alt=""
-              class="col-1"
+              class="weather-icon-big"
             />
           </div>
           <div class="column g-0">
@@ -92,11 +92,11 @@ const renderFutureWeather = async (
             <div
               class="container d-flex justify-content-between align-items-center p-0"
             >
-              <h3 class="mb-4">${date}</h3>
+              <h3 >${date}</h3>
               <img
-                src="https://openweathermap.org/img/w/${icon}.png"
-                alt=""
-                class="col-1"
+                src="https://openweathermap.org/img/wn/${icon}@2x.png"
+                alt="weather Icon"
+                class="col-1 weather-icon"
               />
             </div>
             <div class="row g-0">
@@ -275,7 +275,7 @@ locationList.on("click", async function (event) {
       $("#futureWeatherSection").empty();
       const { weatherData } = await getLonAndLat(cityName);
       const { current: currentWeather, daily: futureWeather } = weatherData;
-
+      console.log(currentWeather);
       renderCurrentWeather(
         cityName,
         currentWeather.temp,

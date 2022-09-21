@@ -1,5 +1,18 @@
 .custom-width-card {
-  width: 20rem;
+  width: 31%;
+  min-width: 20rem;
+}
+
+.weather-icon {
+  background-color: rgb(255, 185, 54);
+  border-radius: 50%;
+  height: 100%;
+}
+
+.weather-icon-big {
+  background-color: rgb(244, 124, 84);
+  border-radius: 50%;
+  height: 100%;
 }
 
 @media screen and (max-width: 600px) {
